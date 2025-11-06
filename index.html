@@ -1,0 +1,196 @@
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Педагоги Logika - підсумки місяця</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="logo">L</div>
+        <div>
+          <h1>Педагоги Logika</h1>
+          <p class="lead">Аналіз роботи викладачів</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="filters" role="tablist" aria-label="filters">
+          <button class="btn active" data-filter="all">Усі</button>
+          <button class="btn" data-filter="A">Категорія A</button>
+          <button class="btn" data-filter="B">Категорія B</button>
+        </div>
+
+        <div class="sort">
+          <label style="font-size:13px;color:var(--muted)">Сортувати за успішністю</label>
+          <button class="btn" id="sortBtn" data-order="desc">За спаданням ↓</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </main>
+
+    <footer>
+      Автоматичне підсвічування: <span style="color:var(--green)">Відвали ≤ 5% → зелений</span> ·
+      <span style="color:var(--yellow)">Успішність ≥ 80% → жовтий</span> ·
+      <span style="color:var(--purple-2);color:var(--purple-2)">Конверсія ≥ 45% → фіолетовий</span>
+    </footer>
+  </div>
+<script>
+  const teachers = [
+  { name:"Стас Спіжавка", role:"Викладач", drops:4.48, success:83.68, conv:null, salary:true, category:"A" },
+  { name:"Надія Родімкіна", role:"Викладач", drops:2.13, success:85.67, conv:null, salary:true, category:"A" },
+  { name:"Дар'я Борисенко", role:"Викладач", drops:5.00, success:76.89, conv:33.33, salary:true, category:"B" },
+  { name:"Людмила Бешлей", role:"Викладач", drops:null, success:78.83, conv:50.00, salary:true, category:"B" },
+  { name:"Микола Ремішевський", role:"Викладач", drops:null, success:94.71, conv:75.00, salary:true, category:"A" },
+  { name:"Галина Сребніцька", role:"Викладач", drops:2.70, success:85.92, conv:50.00, salary:true, category:"A" },
+  { name:"Владислава Торчинська", role:"Викладач", drops:2.50, success:89.75, conv:20.83, salary:true, category:"B" },
+  { name:"Софія Стасюк", role:"Викладач", drops:8.11, success:93.66, conv:75.00, salary:true, category:"B" },
+  { name:"Настя Цугуй", role:"Викладач", drops:null, success:95.45, conv:null, salary:true, category:"B" },
+  { name:"Ірина Мікульська", role:"Викладач", drops:null, success:92.08, conv:null, salary:true, category:"B" },
+  { name:"Влад Длубік", role:"Викладач", drops:7.14, success:80.84, conv:80.00, salary:true, category:"B" },
+  { name:"Олександр Цимбалюк", role:"Викладач", drops:2.56, success:74.53, conv:null, salary:true, category:"B" }
+];
+
+// === Тут підставляєш шляхи до фото ===
+// формат ключа: точна назва teacher.name
+// приклад локально: "img/olena.jpg"
+// приклад Drive: "https://drive.google.com/uc?export=view&id=FILE_ID"
+const imageMap = {
+  "Стас Спіжавка": "спіжавка стас.png",
+  "Надія Родімкіна": "родімкіна надія.png",
+  "Дар'я Борисенко": "борисенко дар'я.png",
+  "Людмила Бешлей": "бешлей людмила.png",
+  "Микола Ремішевський": "ремішевський микола.png",
+  "Галина Сребніцька": "сребніцька галина.png",
+  "Владислава Торчинська": "торчинська влада.png",
+  "Софія Стасюк": "стасюк софія.png",
+  "Настя Цугуй": "цугуй анастасія.png",
+  "Ірина Мікульська": "ірина мікульська.png",
+  "Влад Длубік": "длубік влад.png",
+  "Олександр Цимбалюк": "цимбалюк саша.png"
+};
+
+/* --- thresholds --- */
+const thresholds = { drops:5.0, success:80.0, conv:45.0 };
+
+const grid = document.getElementById('grid');
+
+function hasDropsGood(d){ return (typeof d === 'number') && (d <= thresholds.drops); }
+function hasSuccessGood(s){ return (typeof s === 'number') && (s >= thresholds.success); }
+function hasConvGood(c){ return (typeof c === 'number') && (c >= thresholds.conv); }
+
+function safeClass(name){
+  // повертає безпечний клас з імені (для .card.<class>)
+  return name.toLowerCase().replace(/[^a-zа-я0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+
+function render(data){
+  grid.innerHTML = '';
+  data.forEach(t => {
+    const passes = { drops: hasDropsGood(t.drops), success: hasSuccessGood(t.success), conv: hasConvGood(t.conv) };
+    const fullPass = passes.drops && passes.success && passes.conv;
+
+    const card = document.createElement('article');
+    card.className = 'card ' + safeClass(t.name);
+
+    // left photo div
+    const photo = document.createElement('div');
+    photo.className = 'photo';
+    // set background-image if mapping exists
+    const imgSrc = imageMap[t.name];
+    if(imgSrc){
+      photo.style.backgroundImage = `url("${imgSrc}")`;
+      // ensure center positioning
+      photo.style.backgroundPosition = 'center';
+      photo.style.backgroundSize = 'cover';
+    } else {
+      photo.textContent = 'Фото';
+    }
+    card.appendChild(photo);
+
+    // meta
+    const meta = document.createElement('div'); meta.className = 'meta';
+    const name = document.createElement('div'); name.className='name'; name.textContent = t.name;
+    const role = document.createElement('div'); role.className='role'; role.textContent = t.role;
+    meta.appendChild(name); meta.appendChild(role);
+
+    // metrics
+    const metrics = document.createElement('div'); metrics.className='metrics';
+    const mDrops = document.createElement('div'); mDrops.className='metric';
+    mDrops.innerHTML = `<div class="label">Відвали</div><div class="value">${t.drops===null?'-':t.drops.toFixed(2)+'%'}</div>`;
+    if(passes.drops) mDrops.style.borderLeft='4px solid var(--green)';
+    const mSucc = document.createElement('div'); mSucc.className='metric';
+    mSucc.innerHTML = `<div class="label">Успішність</div><div class="value">${t.success===null?'-':t.success.toFixed(2)+'%'}</div>`;
+    if(passes.success) mSucc.style.borderLeft='4px solid var(--yellow)';
+    const mConv = document.createElement('div'); mConv.className='metric';
+    mConv.innerHTML = `<div class="label">Конверсія</div><div class="value">${t.conv===null?'-':t.conv.toFixed(2)+'%'}</div>`;
+    if(passes.conv) mConv.style.borderLeft='4px solid var(--purple-2)';
+    metrics.appendChild(mDrops); metrics.appendChild(mSucc); metrics.appendChild(mConv);
+    meta.appendChild(metrics);
+
+    card.appendChild(meta);
+
+    // right column
+    const right = document.createElement('div'); right.className='rightcol';
+    const badges = document.createElement('div'); badges.className='badges';
+    const bDrops = document.createElement('span'); bDrops.className = 'badge ' + (passes.drops ? 'b-green' : 'b-none');
+    bDrops.textContent = 'Відвали ' + (t.drops===null?'-': (t.drops.toFixed(2)+'%'));
+    const bSucc = document.createElement('span'); bSucc.className = 'badge ' + (passes.success ? 'b-yellow' : 'b-none');
+    bSucc.textContent = 'Успішність ' + (t.success===null?'-': (t.success.toFixed(0)+'%'));
+    const bConv = document.createElement('span'); bConv.className = 'badge ' + (passes.conv ? 'b-purple' : 'b-none');
+    bConv.textContent = 'Конверсія ' + (t.conv===null?'-': (t.conv.toFixed(0)+'%'));
+    badges.appendChild(bDrops); badges.appendChild(bSucc); badges.appendChild(bConv);
+    right.appendChild(badges);
+    const cat = document.createElement('div'); cat.className='category'; cat.textContent = 'Категорія ' + t.category; right.appendChild(cat);
+    const sal = document.createElement('div'); sal.style.fontSize='13px'; sal.style.color='var(--muted)'; sal.textContent = t.salary ? 'Зарплата врахована ✓' : 'Зарплата ні';
+    right.appendChild(sal);
+    card.appendChild(right);
+
+    if(fullPass){
+      card.style.boxShadow = '0 14px 40px rgba(45,45,66,0.12), 0 0 0 3px rgba(212,175,55,0.12) inset';
+    }
+
+    grid.appendChild(card);
+  });
+}
+
+// sorting & filtering
+let currentFilter = 'all', sortOrder='desc';
+function getFiltered(){
+  let out = teachers.slice();
+  if(currentFilter === 'A' || currentFilter === 'B') out = out.filter(t => t.category === currentFilter);
+  out.sort((a,b)=>{
+    const av = (typeof a.success === 'number') ? a.success : -Infinity;
+    const bv = (typeof b.success === 'number') ? b.success : -Infinity;
+    return sortOrder==='desc' ? (bv-av) : (av-bv);
+  });
+  return out;
+}
+function update(){ render(getFiltered()); }
+
+document.querySelectorAll('.filters .btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filters .btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.getAttribute('data-filter');
+    update();
+  });
+});
+const sortBtn = document.getElementById('sortBtn');
+sortBtn.addEventListener('click', ()=>{
+  sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+  sortBtn.dataset.order = sortOrder;
+  sortBtn.textContent = sortOrder === 'desc' ? 'За спаданням ↓' : 'За зростанням ↑';
+  update();
+});
+
+update();
+</script>
+  
+</body>
+</html>
