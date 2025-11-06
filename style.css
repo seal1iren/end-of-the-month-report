@@ -1,0 +1,162 @@
+  /* Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  :root{
+    --bg: #F6F5FF;
+    --card-bg: #ffffff;
+    --purple: #5A33D1;
+    --purple-2: #3F24A8;
+    --yellow: #FFD24A;
+    --muted: #6b6b78;
+    --green: #28A745;
+    --gold: #D4AF37;
+    --glass: rgba(90,51,209,0.06);
+    --max-width: 1100px;
+    --radius: 12px;
+    --shadow: 0 6px 20px rgba(45,45,66,0.08);
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--bg) 0%, #EEF0FF 100%);
+    color:#111;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:32px 20px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .wrap{
+    width:100%;
+    max-width:var(--max-width);
+  }
+
+  header{
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+
+  .title {
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  .logo {
+    width:56px;height:56px;border-radius:12px;
+    background:linear-gradient(135deg,var(--purple),var(--purple-2));
+    display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+    box-shadow:var(--shadow);
+    font-size:18px;
+  }
+  h1{margin:0;font-size:20px}
+  p.lead{margin:0;color:var(--muted);font-size:14px}
+
+  /* Controls */
+  .controls{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+  .filters{
+    display:flex;
+    gap:8px;
+  }
+  .btn {
+    border:1px solid rgba(16,16,30,0.06);
+    background:white;
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    font-size:13px;
+    box-shadow:0 3px 10px rgba(16,16,30,0.03);
+  }
+  .btn.active{
+    background:linear-gradient(90deg,var(--purple),var(--purple-2));
+    color:white;
+    border:0;
+  }
+
+  .controls .sort {
+    display:flex;gap:8px;align-items:center;
+    background:transparent;border:none;font-size:13px;color:var(--muted);
+  }
+
+  /* Grid */
+  .grid{
+    display:grid;
+    gap:16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 980px){ .grid{grid-template-columns: repeat(2,1fr);} }
+  @media (max-width: 640px){ .grid{grid-template-columns: 1fr;} }
+
+  /* Card */
+  .card{
+    background:var(--card-bg);
+    border-radius:var(--radius);
+    padding:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    border: 2px solid transparent;
+  }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 14px 36px rgba(45,45,66,0.12);}
+
+  .photo{
+    width:84px;height:84px;border-radius:10px;
+    border:2px dashed rgba(90,51,209,0.12);
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--purple-2);font-weight:700;background:var(--glass);
+  }
+
+  .meta{flex:1;display:flex;flex-direction:column;gap:8px;}
+  .name{font-weight:700;color:var(--purple-2);font-size:15px}
+  .role{font-size:13px;color:var(--muted);margin-top:2px}
+
+  .metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .metric{
+    background:linear-gradient(180deg,#fff,#fbfbff);
+    border-radius:10px;padding:8px 10px;font-size:13px;border:1px solid rgba(16,16,30,0.04);
+    display:flex;flex-direction:column;gap:6px;min-width:100px;
+  }
+  .metric .label{font-size:11px;color:var(--muted)}
+  .metric .value{font-weight:700}
+
+  /* badges */
+  .badges{display:flex;gap:8px;align-items:center;margin-left:auto}
+  .badge{
+    padding:6px 8px;border-radius:999px;font-size:12px;font-weight:700;color:white;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .b-green{background:var(--green)}
+  .b-yellow{background:var(--yellow); color:#2b2b2b}
+  .b-purple{background:var(--purple-2)}
+  .b-none{background:#E9EDF8;color:#4b4b6b}
+
+  .rightcol{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+
+  .category{
+    font-weight:700;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,0.03);
+    font-size:13px;color:var(--purple-2);
+  }
+
+  /* Gold outline for full pass */
+  .full-pass{
+    border-color: linear-gradient(90deg,var(--gold),#b8860b);
+    box-shadow: 0 8px 28px rgba(212,175,55,0.12);
+  }
+  /* small footer */
+  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
