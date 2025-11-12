@@ -8,17 +8,16 @@
 <link rel="icon" type="image/x-icon" href="img/logo-logika.png">
 </head>
 <body>
-  <div id="averages" class="averages-box"></div>
   <div class="wrap">
     <header>
       <div class="title">
         <div class="logo">L</div>
         <div>
           <h1>Педагоги Logika</h1>
-          <p class="lead">Аналіз роботи викладачів у місяці жовтень</p>
+          <p class="lead">Аналіз роботи викладачів у ЖОВТНІ</p>
         </div>
       </div>
-
+        
       <div class="controls">
         <div class="filters" role="tablist" aria-label="filters">
           <button class="btn active" data-filter="all">Усі</button>
@@ -31,6 +30,7 @@
           <button class="btn" id="sortBtn" data-order="desc">За спаданням ↓</button>
         </div>
       </div>
+      <div id="averages" class="averages-box"></div>
     </header>
 
     <main>
@@ -38,11 +38,10 @@
     </main>
 
     <footer>
-      Автоматичне підсвічування: <span style="color:var(--green)">Відвали ≤ 5% → зелений</span> ·
-      <span style="color:var(--yellow)">Успішність ≥ 80% → жовтий</span> ·
-      <span style="color:var(--purple-2);color:var(--purple-2)">Конверсія ≥ 45% → фіолетовий</span>
+      Хороша робота! З любов'ю Ірен
     </footer>
   </div>
+
 
   <script>
     const teachers = [
@@ -202,12 +201,9 @@ function showAverages(){
   const el = document.getElementById('averages');
   el.innerHTML = `
     <div><b>Середні показники команди</b></div>
-    <div>Кількість дітей: 328</div>
-    <div>Кількість відвалів: 12</div>
-    <div>Відвали: 3.66%</div>
-    <div>Конверсія: 54.84%</div>
-    <div>Перевід: 64.44%</div>
-    <div>Успішність: ${success ? success.toFixed(2)+'%' : '-'}</div>
+    <div>К-сть дітей: 328   К-сть відвалів: 12</div>
+    <div>Відвали: <b>3.66%</b>   Конверсія: <b>54.84%</b></div>
+    <div>Перевід: <b>64.44%</b>   Успішність: <b>${success ? success.toFixed(2)+'%' : '-'}</b></div>
   `;
 }
 
