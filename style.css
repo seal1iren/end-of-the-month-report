@@ -1,11 +1,11 @@
-  /* Fonts */
+/* Fonts */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
   :root{
-    --bg: #F6F5FF;
+    --bg: #FFD632;
     --card-bg: #ffffff;
-    --purple: #5A33D1;
-    --purple-2: #3F24A8;
+    --purple: #4023A8;
+    --purple-2: #4023A8;
     --yellow: #FFD24A;
     --muted: #6b6b78;
     --green: #28A745;
@@ -16,16 +16,16 @@
     --shadow: 0 6px 20px rgba(45,45,66,0.08);
   }
 
-  html,body{height:100%}
+  html,body{height:100%; background-color:#FFD632;}
   body{
     margin:0;
     font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(180deg,var(--bg) 0%, #EEF0FF 100%);
     color:#111;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     padding:32px 20px;
     display:flex;
+ background:url("https://github.com/seal1iren/end-of-the-month-report/blob/main/img/%D0%97%D0%B0%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B0%20%D0%BD%D0%BE%D1%83%D1%82.jpg?raw=true")no-repeat center/cover;
   }
 
   .wrap{
@@ -161,10 +161,9 @@
   footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
 
 .averages-box {
-  position: fixed;
-  top: 15px;
-  right: -20px;
-  transform: translateX(-50%);
+  margin-right:-80%;
+  width:400px;
+  height: 110px;
   background: #4023A8;
   color: #FFFFFF;
   border-radius: 16px;
@@ -172,7 +171,7 @@
   box-shadow: 0 8px 30px rgba(0,0,0,0.1);
   font-size: 15px;
   line-height: 1.5;
-  z-index: 999;
+  z-index: 3;
   text-align: center;
   min-width: 260px;
   backdrop-filter: blur(8px);
