@@ -149,7 +149,7 @@ function render(data){
     badges.appendChild(bDrops); badges.appendChild(bSucc); badges.appendChild(bConv);
     right.appendChild(badges);
     const cat = document.createElement('div'); cat.className='category'; cat.textContent = 'Категорія ' + t.category; right.appendChild(cat);
-    const sal = document.createElement('div'); sal.style.fontSize='13px'; sal.style.color='var(--muted)'; sal.textContent = t.salary ? 'Зарплата врахована ✓' : 'Зарплата ні';
+    const sal = document.createElement('div'); sal.style.fontSize='13px'; sal.style.color='var(--muted)'; sal.textContent = t.salary ? 'Зарплату виплачено ✓' : 'Зарплату не виплачено';
     right.appendChild(sal);
     card.appendChild(right);
 
