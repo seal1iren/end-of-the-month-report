@@ -44,19 +44,18 @@
 
 
   <script>
-    const teachers = [
-  { name:"Стас Спіжавка", role:"Викладач онлайн та м.Чернівці", drops:4.48, success:83.68, conv:null, salary:true, transfer:79, kids:62, category:"A" },
-  { name:"Надія Родімкіна", role:"Викладач онлайн та м.Сторожинець", drops:2.13, success:85.67, conv:null, salary:true, transfer:null, kids:41, category:"A" },
-  { name:"Дар'я Борисенко", role:"Викладач м. Кам'янець-Подільський", drops:5.00, success:76.89, conv:33.33, salary:true, transfer:100, kids:20, category:"B" },
+   const teachers = [
+  { name:"Стас Спіжавка", role:"Викладач онлайн та м.Чернівці", drops:1.79, success:81.76, conv:null, salary:true, transfer:null, kids:56, category:"A" },
+  { name:"Надія Родімкіна", role:"Викладач онлайн та м.Сторожинець", drops:2.13, success:70.82, conv:null, salary:true, transfer:75, kids:47, category:"B" },
+  { name:"Дар'я Борисенко", role:"Викладач м. Кам'янець-Подільський", drops:0, success:84.86, conv:80, salary:true, transfer:null, kids:18, category:"A" },
   { name:"Людмила Бешлей", role:"Викладач м.Чернівці", drops:0, success:78.83, conv:50.00, salary:true, transfer:null, kids:14, category:"B" },
-  { name:"Микола Ремішевський", role:"Викладач м.Кам'янець-Подільський", drops:0, success:94.71, conv:75.00, salary:true, transfer:null, kids:28, category:"A" },
-  { name:"Галина Сребніцька", role:"Викладач м.Чернівці", drops:2.70, success:85.92, conv:50.00, salary:true, transfer:null, kids:28, category:"A" },
-  { name:"Владислава Торчинська", role:"Викладач м.Чернівці", drops:2.50, success:89.75, conv:20.83, salary:true, transfer:61.54, kids:41, category:"B" },
-  { name:"Софія Стасюк", role:"Викладач м.Сторожинець", drops:8.11, success:93.66, conv:75.00, salary:true, transfer:null, kids:37, category:"B" },
-  { name:"Настя Цугуй", role:"Викладач та клієнтський менеджер м. Сторожинець", drops:0, success:95.45, conv:null, salary:true, transfer:null, kids:0, category:"B" },
-  { name:"Ірина Мікульська", role:"Викладач м.Чернівці та тьютор", drops:0, success:92.08, conv:null, salary:true, transfer:null, kids:15, category:"B" },
-  { name:"Влад Длубік", role:"Викладач м.Чернівці", drops:7.14, success:80.84, conv:80.00, salary:true, transfer:null, kids:16, category:"B" },
-  { name:"Олександр Цимбалюк", role:"Викладач м.Кам'янець-Подільський", drops:2.86, success:74.53, conv:null, salary:true, transfer:null, kids:40, category:"B" }
+  { name:"Микола Ремішевський", role:"Викладач м.Кам'янець-Подільський", drops:0, success:84.18, conv:75.00, salary:true, transfer:null, kids:34, category:"B" },
+  { name:"Галина Сребніцька", role:"Викладач м.Чернівці", drops:13.51, success:84.18, conv:167, salary:true, transfer:80, kids:37, category:"B" },
+  { name:"Владислава Торчинська", role:"Викладач м.Чернівці", drops:0, success:92.09, conv:60, salary:true, transfer:55.56, kids:26, category:"A" },
+  { name:"Софія Стасюк", role:"Викладач м.Сторожинець", drops:8.11, success:93.81, conv:null, salary:true, transfer:null, kids:37, category:"B" },
+  { name:"Ірина Мікульська", role:"Викладач м.Чернівці та тьютор", drops:0, success:84.56, conv:null, salary:true, transfer:null, kids:15, category:"B" },
+  { name:"Влад Длубік", role:"Викладач м.Чернівці", drops:6.67, success:84.03, conv:80.00, salary:true, transfer:null, kids:15, category:"B" },
+  { name:"Олександр Цимбалюк", role:"Викладач м.Кам'янець-Подільський", drops:5.00, success:71.57, conv:75, salary:true, transfer:null, kids:40, category:"B" }
 ];
 
 const imageMap = {
@@ -68,7 +67,6 @@ const imageMap = {
   "Галина Сребніцька": "img/сребніцька-галина.png",
   "Владислава Торчинська": "img/торчинська-влада.png",
   "Софія Стасюк": "img/стасюк-софія.png",
-  "Настя Цугуй": "img/цугуй-анастасія.png",
   "Ірина Мікульська": "img/ірина-мікульська.png",
   "Влад Длубік": "img/длубік-влад.png",
   "Олександр Цимбалюк": "img/цимбалюк-саша.png"
@@ -230,7 +228,6 @@ sortBtn.addEventListener('click', ()=>{
 });
 
 update();
-
   </script>
 </body>
 </html>
