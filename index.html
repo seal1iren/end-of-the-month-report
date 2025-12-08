@@ -44,7 +44,7 @@
 
 
   <script>
-   const teachers = [
+  const teachers = [
   { name:"Стас Спіжавка", role:"Викладач онлайн та м.Чернівці", drops:1.79, success:81.76, conv:null, salary:true, transfer:null, kids:56, category:"A" },
   { name:"Надія Родімкіна", role:"Викладач онлайн та м.Сторожинець", drops:2.13, success:70.82, conv:null, salary:true, transfer:75, kids:47, category:"B" },
   { name:"Дар'я Борисенко", role:"Викладач м. Кам'янець-Подільський", drops:0, success:84.86, conv:80, salary:true, transfer:null, kids:18, category:"A" },
@@ -199,9 +199,9 @@ function showAverages(){
   const el = document.getElementById('averages');
   el.innerHTML = `
     <div><b>Середні показники команди</b></div>
-    <div>К-сть дітей: 328   К-сть відвалів: 12</div>
-    <div>Відвали: <b>3.66%</b>   Конверсія: <b>54.84%</b></div>
-    <div>Перевід: <b>64.44%</b>   Успішність: <b>${success ? success.toFixed(2)+'%' : '-'}</b></div>
+    <div>К-сть дітей: 335 К-сть відвалів: 15</div>
+    <div>Відвали: <b>4.48%</b>   Конверсія: <b>83.33%</b></div>
+    <div>Перевід: <b>65.63%</b>   Успішність: <b>${success ? success.toFixed(2)+'%' : '-'}</b></div>
   `;
 }
 
@@ -228,6 +228,7 @@ sortBtn.addEventListener('click', ()=>{
 });
 
 update();
+
   </script>
 </body>
 </html>
